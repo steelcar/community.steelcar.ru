@@ -1,0 +1,3 @@
+[submodule "modules/nodebb"]
+	path = modules/nodebb
+	url = https://github.com/steelcar/NodeBB.git

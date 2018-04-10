@@ -1,0 +1,55 @@
+version: '3.6'
+services:
+  nginx:
+    build: modules/nginx
+    env_file:
+      - ~/.community.steelcar.ru.env
+    volumes:
+      - ./data/nginx:/data/nginx
+    networks:
+      - app-front-tier
+      - reverse-proxy
+    restart: unless-stopped
+
+  nodebb:
+    image: node:9.11.1
+    volumes:
+      - ./modules/nodebb:/app
+      - ./data/nodebb/config.json:/app/config.json
+      - ./data/nodebb/public/uploads:/app/public/uploads
+    working_dir: /app
+    entrypoint: ./nodebb
+    command: [start]
+    expose:
+      - "4567"
+    networks:
+      - app-front-tier
+      - app-back-tier
+      - reverse-proxy
+    restart: unless-stopped
+
+  redis:
+    image: redis:3.2.11-alpine
+    volumes:
+      - ./data/redis:/data
+    command: redis-server --requirepass ${REDIS_PASS}
+    sysctls:
+      - net.core.somaxconn=511
+    networks:
+      - app-back-tier
+    restart: unless-stopped
+
+  sshd:
+    build: modules/sshd
+    ports:
+      - "${SSHD_PUBLIC_PORT}:22"
+    networks:
+      - app-back-tier
+    restart: unless-stopped
+
+networks:
+  app-front-tier:
+  app-back-tier:
+  reverse-proxy:
+    external:
+      name: reverse-proxy

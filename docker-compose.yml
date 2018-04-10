@@ -25,7 +25,6 @@ services:
     networks:
       - app-front-tier
       - app-back-tier
-      - reverse-proxy
     restart: unless-stopped
 
   redis:

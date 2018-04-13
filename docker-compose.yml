@@ -16,6 +16,8 @@ services:
     volumes:
       - ./modules/nodebb:/app
       - ./data/nodebb/config.json:/app/config.json
+      - ./data/nodebb/package.json:/app/package.json
+      - ./data/nodebb/package-lock.json:/app/package-lock.json
       - ./data/nodebb/public/uploads:/app/public/uploads
     working_dir: /app
     entrypoint: ./nodebb

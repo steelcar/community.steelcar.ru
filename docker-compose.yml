@@ -13,7 +13,7 @@ services:
 
   nodebb:
     volumes:
-      - ./data/nodebb/public/uploads:/app/public/uploads
+      - ./data/nodebb:/mnt/data/nodebb
     working_dir: /app
     entrypoint: ./nodebb
     command: [start]

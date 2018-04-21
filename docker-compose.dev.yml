@@ -1,5 +1,23 @@
 version: '3.6'
+
 services:
+  nginx:
+    build: modules/nginx
+
   nodebb:
+    image: node:9.11.1
+    volumes:
+      - ./modules/nodebb:/app
+      - ./data/.cache/yarn:/mnt/data/.cache/yarn
+    environment:
+      - NODE_ENV=development
+      - YARN_CACHE_FOLDER=/mnt/data/.cache/yarn
     entrypoint: npx
     command: [grunt]
+    tty: true
+
+  redis:
+    build: modules/redis
+
+  sshd:
+    build: modules/sshd

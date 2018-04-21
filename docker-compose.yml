@@ -1,7 +1,7 @@
 version: '3.6'
+
 services:
   nginx:
-    build: modules/nginx
     env_file:
       - ./env/.vhost.env
     volumes:
@@ -12,12 +12,7 @@ services:
     restart: unless-stopped
 
   nodebb:
-    image: node:9.11.1
     volumes:
-      - ./modules/nodebb:/app
-      - ./data/nodebb/config.json:/app/config.json
-      - ./data/nodebb/package.json:/app/package.json
-      - ./data/nodebb/package-lock.json:/app/package-lock.json
       - ./data/nodebb/public/uploads:/app/public/uploads
     working_dir: /app
     entrypoint: ./nodebb
@@ -30,7 +25,6 @@ services:
     restart: unless-stopped
 
   redis:
-    build: modules/redis
     env_file:
       - env/.redis.env
     volumes:
@@ -42,7 +36,6 @@ services:
     restart: unless-stopped
 
   sshd:
-    build: modules/sshd
     ports:
       - "${SSHD_PUBLIC_PORT}:22"
     networks:

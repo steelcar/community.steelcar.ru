@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  nginx:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/nginx:${VERSION}
+
+  nodebb:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/nodebb:${VERSION}
+
+  redis:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/redis:${VERSION}
+
+  sshd:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/sshd:${VERSION}

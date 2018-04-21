@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  nginx:
+    build: modules/nginx
+
+  nodebb:
+    build:
+      context: modules/nodebb
+      args:
+        NODE_VERSION: 8.11.1
+    volumes:
+      - ./data/.cache/yarn:/mnt/data/.cache/yarn
+
+  redis:
+    build: modules/redis
+
+  sshd:
+    build: modules/sshd
+
+  aws:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/aws:${VERSION}
+    build: modules/awscli

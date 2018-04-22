@@ -9,7 +9,9 @@ set -e
 set -o allexport; source ${PWD}/env/.registry.env; set +o allexport
 source ${PWD}/env/.sshd.env
 
-docker-compose down
+if [ -f ${PWD}/.env ]; then
+   docker-compose down
+fi
 
 if [[ "${@#dev}" == "$@" ]]
 then

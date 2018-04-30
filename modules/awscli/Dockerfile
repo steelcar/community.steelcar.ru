@@ -4,7 +4,7 @@ RUN apk --no-cache add \
         python \
     && apk --no-cache add --virtual build-dependencies \
         py-pip \
-    && pip --no-cache-dir install \
+    && pip --no-cache-dir install --upgrade \
         awscli \
     && apk del build-dependencies
 

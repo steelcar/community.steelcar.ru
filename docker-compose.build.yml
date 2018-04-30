@@ -17,7 +17,3 @@ services:
 
   sshd:
     build: modules/sshd
-
-  aws:
-    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/aws:${VERSION}
-    build: modules/awscli

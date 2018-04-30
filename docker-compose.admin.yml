@@ -1,0 +1,8 @@
+version: '3.6'
+
+services:
+  aws:
+    image: ${DOCKER_REGISTRY_URI}/community.steelcar.ru/aws:${VERSION}
+    build: modules/awscli
+    volumes:
+      - ~/.aws:/root/.aws
